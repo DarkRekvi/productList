@@ -10,19 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.actorfragment.R;
-import com.example.actorfragment.entities.Actor;
+import com.example.actorfragment.entities.Product;
 
 import java.util.List;
 
-public class ActorAdapter extends ArrayAdapter<Actor> {
+public class ProductAdapter extends ArrayAdapter<Product> {
     private final LayoutInflater inflater;
     private final int layout;
-    private final List<Actor> actors;
+    private final List<Product> products;
 
-    public ActorAdapter(Context context, int resource, List<Actor> actors) {
-        super(context, resource, actors);
+    public ProductAdapter(Context context, int resource, List<Product> products) {
+        super(context, resource, products);
 
-        this.actors = actors;
+        this.products = products;
         this.layout = resource;
         this.inflater = LayoutInflater.from(context);
     }
@@ -40,24 +40,21 @@ public class ActorAdapter extends ArrayAdapter<Actor> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Actor actor = actors.get(position);
+        Product product = products.get(position);
 
-        viewHolder.photoView.setImageDrawable(actor.getPhotoResource());
-        viewHolder.fullNameView.setText(actor.getFullName());
-        viewHolder.dateOfBornView.setText(DateUtils.formatDateTime(getContext(),
-                actor.getDateOfBorn().getTime(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+        viewHolder.nameView.setText(product.getName());
+        viewHolder.typeView.setText(product.getType());
+        viewHolder.companyView.setText(product.getCompany());
 
         return convertView;
     }
 
     private class ViewHolder {
-        final ImageView photoView;
-        final TextView fullNameView, dateOfBornView;
+        final TextView nameView, typeView, companyView;
         ViewHolder(View view){
-            photoView = view.findViewById(R.id.item_list_photo);
-            fullNameView = view.findViewById(R.id.item_list_full_name);
-            dateOfBornView = view.findViewById(R.id.item_list_date_of_born);
+            nameView = view.findViewById(R.id.item_list_photo);
+            typeView = view.findViewById(R.id.item_list_full_name);
+            companyView = view.findViewById(R.id.item_list_date_of_born);
         }
     }
 }

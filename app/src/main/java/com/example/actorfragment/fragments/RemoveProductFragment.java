@@ -2,7 +2,6 @@ package com.example.actorfragment.fragments;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -12,19 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.actorfragment.entities.Actor;
-import com.example.actorfragment.databinding.FragmentRemoveActorBinding;
+import com.example.actorfragment.databinding.FragmentRemoveProductBinding;
+import com.example.actorfragment.entities.Product;
+import com.example.actorfragment.databinding.FragmentRemoveProductBinding;
 
-public class RemoveActorFragment extends Fragment {
+public class RemoveProductFragment extends Fragment {
 
-    FragmentRemoveActorBinding binding;
 
-    Actor selectedActor;
-    long selectedActorId;
+    FragmentRemoveProductBinding binding;
 
-    public RemoveActorFragment(Actor selectedActor, long selectedActorId) {
-        this.selectedActor = selectedActor;
-        this.selectedActorId = selectedActorId;
+    Product selectedProduct;
+    long selectedProductId;
+
+    public RemoveProductFragment(Product selectedProduct, long selectedProductId) {
+        this.selectedProduct = selectedProduct;
+        this.selectedProductId = selectedProductId;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class RemoveActorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentRemoveActorBinding.inflate(inflater, container, false);
+        binding = FragmentRemoveProductBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -50,7 +51,7 @@ public class RemoveActorFragment extends Fragment {
 
     private void agreeBtnInit(){
         binding.selectedAgreeBtn.setOnClickListener(view -> {
-            ListFragment.actors.remove((int) selectedActorId);
+            ListFragment.products.remove((int) selectedProductId);
 
             getActivity().getSupportFragmentManager().popBackStack();
         });
@@ -63,11 +64,9 @@ public class RemoveActorFragment extends Fragment {
     }
 
     public void setData(){
-        binding.selectedActorImage.setImageDrawable(selectedActor.getPhotoResource());
-        binding.selectedActorFullName.setText(selectedActor.getFullName());
-        binding.selectedActorDateOfBorn.setText(DateUtils.formatDateTime(getContext(),
-                selectedActor.getDateOfBorn().getTime(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR)    );
+        binding.selectedProductName.setText(selectedProduct.getName());
+        binding.selectedProductType.setText(selectedProduct.getType());
+        binding.selectedProductCompany.setText(selectedProduct.getCompany());
     }
 
 }
